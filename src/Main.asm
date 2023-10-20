@@ -66,7 +66,7 @@ NoTMSS:
 		move.w 	#$0EE0,	VDPDataPort			; palette 0 slot 1
 
 MainLoop:
-		WaitVBlank						; wait for vblank
+		WaitVBlank					; wait for vblank
 		vram	$0000					; set control port to beginning of VRAM
 		
 		lea 	TestTile, a0				; set a0 to point to tile data
@@ -79,7 +79,7 @@ MainLoop:
 ; VBlank routine
 ; ===========================================================================
 VBlank:
-		move.b	#1, VBlankFlag			; set vblank flag to true
+		move.b	#1, VBlankFlag				; set vblank flag to true
 		rte
 		
 		
