@@ -18,8 +18,8 @@ vram	macro
 ; By: Rivet
 ; -------------------------------------------------------------
 WaitVBlank:    macro
-        clr.b    (VBFlag).w
-    @WaitVB\@:
-        tst.b    (VBFlag).w
-        beq.s    @WaitVB\@
+        clr.b    (VBlankFlag).w
+    @WaitVBlank\@:
+        tst.b    (VBlankFlag).w
+        beq.s    @WaitVBlank\@
     endm
