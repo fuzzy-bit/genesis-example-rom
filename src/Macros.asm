@@ -17,7 +17,7 @@ vram	macro
 ; Macro to wait for VBlank
 ; By: Rivet
 ; -------------------------------------------------------------
-WaitVBL:    macro
+WaitVBlank:    macro
         clr.b    (VBFlag).w
     @WaitVB\@:
         tst.b    (VBFlag).w

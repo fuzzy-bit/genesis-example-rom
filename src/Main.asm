@@ -4,22 +4,22 @@
 ; Vector Table
 ; ---------------------------------------------------------------------------
 StartROM:	
-		dc.l	$00000000, EntryPoint, $00000000, $00000000	; TODO: FILL THESE COMMENTS OUT LATER
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, VBlank,	   $00000000	; screw it let's just do what rivet tells me to do 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
-		dc.l	$00000000, $00000000, $00000000, $00000000	; 
+		dc.l	$00000000, EntryPoint, $00000000, $00000000	; Initial Stack Pointer, Entry Point, Bus Error, Address Error
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Illegal Instruction, Divide By Zero, CHK Exception, TRAPV Exception
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Privilege Violation, TRACE Exception, Line A Emulator, Line F Emulator
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Reserved, Co-Processor Protocol Violation, Format Error, Uninitialized Interrupt
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Reserved, Reserved, Reserved, Reserved
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Reserved, Reserved, Reserved, Reserved
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Spurious Interrupt, IRQ Level 1, IRQ Level 2, IRQ Level 3,
+		dc.l	$00000000, $00000000, VBlank,	 $00000000	; Horizontal Interrput, IRQ Level 5, VBlank
+		dc.l	$00000000, $00000000, $00000000, $00000000	; TRAP 0, TRAP 1, TRAP 2, TRAP 3
+		dc.l	$00000000, $00000000, $00000000, $00000000	; TRAP 4, TRAP 5, TRAP 6, TRAP 7
+		dc.l	$00000000, $00000000, $00000000, $00000000	; TRAP 8, TRAP 9, TRAP A, TRAP B
+		dc.l	$00000000, $00000000, $00000000, $00000000	; TRAP C, TRAP D, TRAP E, TRAP F
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Floating Point Reserved, Floating Point Reserved, Floating Point Reserved, Floating Point Reserved
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Floating Point Reserved, Floating Point Reserved, Floating Point Reserved, Floating Point Reserved
+		dc.l	$00000000, $00000000, $00000000, $00000000	; MMU Reserved, MMU Reserved, MMU Reserved, Reserved
+		dc.l	$00000000, $00000000, $00000000, $00000000	; Reserved, Reserved, Reserved, Reserved
 
 ; ---------------------------------------------------------------------------
 ; Header
@@ -67,7 +67,7 @@ NoTMSS:
 		move.w 	#$0E00,	VDPDataPort			; palette 0 slot 0
 		move.w 	#$0EE0,	VDPDataPort			; palette 0 slot 1
 MainLoop:
-		WaitVBL						; wait for vblank
+		WaitVBlank						; wait for vblank
 		vram	$0000					; set control port to beginning of VRAM
 		
 		lea 	TestTile, a0				; set a0 to point to tile data
