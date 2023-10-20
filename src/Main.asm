@@ -39,10 +39,10 @@ StartOfROM:
 ; ===========================================================================
 EntryPoint:
 		move.b	($A10001).l, d0				; load hardware version/region
-		andi.l	#$0F, d0					; get only the version number
-		beq.s	NoTMSS						; if the version is 0, branch (no TMSS in this machine)
-		move.l	(ConsoleName).w, ($A14000).l	; give TMSS the string "SEGA" so it unlocks the VDP
-		moveq	#$00, d0					; clear d0
+		andi.l	#$0F, d0				; get only the version number
+		beq.s	NoTMSS					; if the version is 0, branch (no TMSS in this machine)
+		move.l	(ConsoleName).w, ($A14000).l		; give TMSS the string "SEGA" so it unlocks the VDP
+		moveq	#$00, d0				; clear d0
 
 NoTMSS:
 		move.w	#$0100, d1				; prepare Z80 value/VDP register increment
