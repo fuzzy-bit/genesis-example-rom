@@ -3,7 +3,7 @@
 ; ===========================================================================
 ; Vector Table
 ; ---------------------------------------------------------------------------
-StartROM:	
+StartOfROM:	
 		dc.l	$00000000, EntryPoint, $00000000, $00000000	; Initial Stack Pointer, Entry Point, Bus Error, Address Error
 		dc.l	$00000000, $00000000, $00000000, $00000000	; Illegal Instruction, Divide By Zero, CHK Exception, TRAPV Exception
 		dc.l	$00000000, $00000000, $00000000, $00000000	; Privilege Violation, TRACE Exception, Line A Emulator, Line F Emulator
@@ -32,8 +32,6 @@ StartROM:
 		include "src/Macros.asm"
 		include "src/Constants.asm"
 
-
-
 ; ===========================================================================
 ; Start of code (Setup)
 ; ===========================================================================
@@ -56,16 +54,15 @@ NoTMSS:
 		move.w  #$8000|%00000100, VDPControl		; disable low-color mode
 		move.w  #$2300, sr				; enable VBlank on CPU
 
-
-
 ; ===========================================================================
 ; Main Program
 ; ===========================================================================
 		bsr.w	InitializeVDP				; initialize vdp
 		
-		; load palette (temporary)
+		; make a small palette
 		move.w 	#$0E00,	VDPDataPort			; palette 0 slot 0
 		move.w 	#$0EE0,	VDPDataPort			; palette 0 slot 1
+
 MainLoop:
 		WaitVBlank						; wait for vblank
 		vram	$0000					; set control port to beginning of VRAM
@@ -91,4 +88,4 @@ VBlank:
 TestTile:
 		incbin "res/Tiles/TestTile.bin"	
 
-FinishROM:	END
+EndOfROM:	END
