@@ -6,7 +6,7 @@
 ; 
 ; Parameters:
 ; 		a0: Tile data
-;		d0: Number of times to loop
+;		d0: Size of tile data in longwords
 ; ===========================================================================
 LoadTiles:
 		move.l  (a0)+, VDPDataPort

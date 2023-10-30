@@ -61,7 +61,7 @@ NoTMSS:
 ; ===========================================================================
 		bsr.w	InitializeVDP				; initialize vdp
 		
-		; make a small palette
+		; make a small palette (palette color format is 0BGR, each nybble must be divisible by 2)
 		move.w 	#$0E00,	VDPDataPort			; palette 0 slot 0
 		move.w 	#$0EE0,	VDPDataPort			; palette 0 slot 1
 
@@ -70,7 +70,7 @@ MainLoop:
 		vram	$0000					; set control port to beginning of VRAM
 		
 		lea 	TestTile, a0				; set a0 to point to tile data
-		move.w	#7, d0					; loop loading for 8 lines
+		move.w	#7, d0					; give the tile loading routine the length of our data in longwords
 		bsr.w	LoadTiles				; load tiles into vram
 		
 		bra.w	MainLoop				; loop endlessly
